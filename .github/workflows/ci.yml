@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -44,21 +48,23 @@ jobs:
         id: npm-ci-test
         run: npm run ci-test
 
-  test-action:
-    name: GitHub Actions Test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-
-      - name: Test Local Action
-        id: test-action
-        uses: ./
-        with:
-          milliseconds: 2000
-
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+  #test-action:
+  #  name: GitHub Actions Test
+  #  runs-on: ubuntu-latest
+  #  permissions:
+  #    id-token: write
+  #    contents: read
+  #  steps:
+  #    - name: Checkout
+  #      id: checkout
+  #      uses: actions/checkout@v4
+  #    - name: Test Local Action
+  #      id: gha-jfrog-oidc
+  #      uses: ./
+  #      with:
+  #        audience: ''  # "audience" of the OIDC Integration
+  #        provider: ''  # "provider name" of the OIDC Integration
+  #        url: ''  # Base URL of Jfrog instance
+  #    - name: Print Output
+  #      id: output
+  #      run: echo "{{ steps.gha-jfrog-oidc.outputs.token }}"

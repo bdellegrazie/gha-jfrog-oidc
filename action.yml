@@ -1,6 +1,6 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'gha-jfrog-oidc'
+description: 'Github Action to OIDC Authenticate to a JFrog service'
+author: 'Brett Delle Grazie'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
@@ -9,15 +9,23 @@ branding:
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  audience:
+    description: >-
+      OIDC Audience for JFrog instance
     required: true
-    default: '1000'
+  provider:
+    description: >-
+      OIDC Provider for JFrog instance
+    required: true
+  url:
+    description: >-
+      Base URL of JFrog instance
+    required: true
 
 # Define your outputs here.
 outputs:
-  time:
-    description: 'Your output description here'
+  token:
+    description: 'JFrog Access Token'
 
 runs:
   using: node20

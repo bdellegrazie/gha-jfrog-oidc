@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
+import * as httpm from '@actions/http-client'
+import { jfrogTokenExchange } from './jfrog'
 
 /**
  * The main function for the action.
@@ -7,18 +8,35 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
+    const audience: string = core.getInput('audience', { required: true })
+    const provider: string = core.getInput('provider', { required: true })
+    const url: string = core.getInput('url', { required: true })
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    // Get the Github Id Token (we should have write permission)
+    const id_token = await core.getIDToken(audience)
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    core.debug(`URL: ${url}, Provider: ${provider}, Audience: ${audience}`)
+    // Get the access token from JFrog
+    const _http: httpm.HttpClient = new httpm.HttpClient('jfrog-oidc-action')
+    const [statusCode, token] = await jfrogTokenExchange(
+      _http,
+      url,
+      provider,
+      id_token
+    )
+    if (statusCode == (httpm.HttpCodes.OK as number)) {
+      if (token) {
+        core.setSecret(token)
+        // Set outputs for other workflow steps to use
+        core.setOutput('token', token)
+      } else {
+        core.setFailed(
+          `JFrog OIDC token did not return a token, status: ${statusCode}`
+        )
+      }
+    } else {
+      core.setFailed(`JFrog OIDC token exchange failed, status: ${statusCode}`)
+    }
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
