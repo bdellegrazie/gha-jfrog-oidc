@@ -1,11 +1,18 @@
 /**
- * Unit tests for src/wait.ts
+ * Unit tests for src/jfrog.ts
  */
 
+import { jest } from '@jest/globals'
+import * as core from '../__fixtures__/core.js'
 import * as httpm from '@actions/http-client'
-import { describe, expect } from '@jest/globals'
 import nock from 'nock'
-import { jfrogTokenExchange } from '../src/jfrog'
+
+// Mocks should be declared before the module being tested is imported.
+jest.unstable_mockModule('@actions/core', () => core)
+
+// The module being tested should be imported dynamically. This ensures that the
+// mocks are used in place of any actual dependencies.
+const { jfrogTokenExchange } = await import('../src/jfrog.js')
 
 class NoErrorThrownError extends Error {}
 
@@ -22,8 +29,18 @@ const getError = async <TError>(call: () => unknown): Promise<TError> => {
 describe('jfrog.ts', () => {
   const _http = new httpm.HttpClient('test')
 
-  afterAll(() => {
+  afterEach(() => {
+    jest.resetAllMocks()
     nock.cleanAll()
+  })
+
+  beforeAll(() => {
+    if (!nock.isActive()) nock.activate()
+    nock.disableNetConnect()
+    nock.enableNetConnect('127.0.0.1')
+  })
+  afterAll(() => {
+    nock.restore()
   })
 
   describe('oidc success exchange', () => {
