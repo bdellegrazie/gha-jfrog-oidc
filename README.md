@@ -1,9 +1,9 @@
 # JFrog OIDC GitHub Action
 
-[![GitHub Super-Linter](https://github.com/actions/typescript-action/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
-![CI](https://github.com/actions/typescript-action/actions/workflows/ci.yml/badge.svg)
-[![Check dist/](https://github.com/actions/typescript-action/actions/workflows/check-dist.yml/badge.svg)](https://github.com/actions/typescript-action/actions/workflows/check-dist.yml)
-[![CodeQL](https://github.com/actions/typescript-action/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/actions/typescript-action/actions/workflows/codeql-analysis.yml)
+[![GitHub Super-Linter](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
+![CI](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/ci.yml/badge.svg)
+[![Check dist/](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/check-dist.yml/badge.svg)](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/check-dist.yml)
+[![CodeQL](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/codeql-analysis.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
 This GitHub Action sets up OIDC based authentication with a JFrog installation.
