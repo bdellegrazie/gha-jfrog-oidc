@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as httpm from '@actions/http-client'
-import { jfrogTokenExchange } from './jfrog'
+import { jfrogTokenExchange } from './jfrog.js'
 
 /**
  * The main function for the action.
