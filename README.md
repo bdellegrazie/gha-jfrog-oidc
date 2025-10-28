@@ -6,9 +6,8 @@
 [![CodeQL](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/bdellegrazie/gha-jfrog-oidc/actions/workflows/codeql-analysis.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
-This GitHub Action sets up OIDC based authentication with a JFrog installation.
-The token can be used as a Bearer token for authentication by the Jfrog CLI,
-cURL or other tooling. Basic authentication is not possible as there is no
+This GitHub Action sets up OIDC based authentication with a JFrog installation. The token can be used as a Bearer token
+for authentication by the Jfrog CLI, cURL or other tooling. Basic authentication is not possible as there is no
 username.
 
 ## Preparation
@@ -18,12 +17,10 @@ In JFrog configure:
 - an [OIDC integration][1]
   - URL for GitHub is fixed at `https://token.actions.githubusercontent.com`
 - an [identity mapping][2]
-  - remember the claims JSON should include the `iss` claim and at least
-    `repository_owner`, or `repository`. See [Security hardening with OpenID
-    Connect][3]
+  - remember the claims JSON should include the `iss` claim and at least `repository_owner`, or `repository`. See
+    [Security hardening with OpenID Connect][3]
 
-In GitHub Actions, set secrets or variables representing the audience, provider
-and URL.
+In GitHub Actions, set secrets or variables representing the audience, provider and URL.
 
 ## Usage
 
@@ -57,11 +54,9 @@ steps:
 
 ## Dependency License Management
 
-This template includes a GitHub Actions workflow,
-[`licensed.yml`](./.github/workflows/licensed.yml), that uses
-[Licensed](https://github.com/licensee/licensed) to check for dependencies with
-missing or non-compliant licenses. This workflow is initially disabled. To
-enable the workflow, follow the below steps.
+This template includes a GitHub Actions workflow, [`licensed.yml`](./.github/workflows/licensed.yml), that uses
+[Licensed](https://github.com/licensee/licensed) to check for dependencies with missing or non-compliant licenses. This
+workflow is initially disabled. To enable the workflow, follow the below steps.
 
 1. Open [`licensed.yml`](./.github/workflows/licensed.yml)
 1. Uncomment the following lines:
@@ -77,16 +72,14 @@ enable the workflow, follow the below steps.
 
 1. Save and commit the changes
 
-Once complete, this workflow will run any time a pull request is created or
-changes pushed directly to `main`. If the workflow detects any dependencies with
-missing or non-compliant licenses, it will fail the workflow and provide details
+Once complete, this workflow will run any time a pull request is created or changes pushed directly to `main`. If the
+workflow detects any dependencies with missing or non-compliant licenses, it will fail the workflow and provide details
 on the issue(s) found.
 
 ### Updating Licenses
 
-Whenever you install or update dependencies, you can use the Licensed CLI to
-update the licenses database. To install Licensed, see the project's
-[Readme](https://github.com/licensee/licensed?tab=readme-ov-file#installation).
+Whenever you install or update dependencies, you can use the Licensed CLI to update the licenses database. To install
+Licensed, see the project's [Readme](https://github.com/licensee/licensed?tab=readme-ov-file#installation).
 
 To update the cached licenses, run the following command:
 
@@ -102,9 +95,7 @@ licensed status
 
 <!-- References -->
 
-[1]:
-  https://jfrog.com/help/r/jfrog-platform-administration-documentation/configure-an-oidc-integration
-[2]:
-  https://jfrog.com/help/r/jfrog-platform-administration-documentation/configure-identity-mappings
+[1]: https://jfrog.com/help/r/jfrog-platform-administration-documentation/configure-an-oidc-integration
+[2]: https://jfrog.com/help/r/jfrog-platform-administration-documentation/configure-identity-mappings
 [3]:
   https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect

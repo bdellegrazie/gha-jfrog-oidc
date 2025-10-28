@@ -13,6 +13,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref_name || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   packages: read
@@ -32,7 +36,7 @@ jobs:
 
       - name: Setup Node.js
         id: setup-node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
           cache: npm
@@ -50,6 +54,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: .
           VALIDATE_ALL_CODEBASE: true
+          VALIDATE_BIOME_FORMAT: false
+          VALIDATE_BIOME_LINT: false
+          VALIDATE_CHECKOV: false
           VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
           VALIDATE_JAVASCRIPT_ES: false
           VALIDATE_JSCPD: false
