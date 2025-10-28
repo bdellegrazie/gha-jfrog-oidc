@@ -81,12 +81,7 @@ describe('jfrog.ts', () => {
         .reply(401, '') // Unauthorized
 
       const error = await getError(async () => {
-        await jfrogTokenExchange(
-          _http,
-          'https://jfrog.example.com',
-          'github',
-          'exampleIdentityToken'
-        )
+        await jfrogTokenExchange(_http, 'https://jfrog.example.com', 'github', 'exampleIdentityToken')
       })
       scope.done()
       expect(scope.isDone()).toBe(true)

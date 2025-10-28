@@ -75,15 +75,8 @@ describe('main.ts', () => {
     // Verify that all of the core library functions were called correctly
     expect(core.error).not.toHaveBeenCalled()
     expect(core.setSecret).toHaveBeenCalledWith('exampleAccessToken')
-    expect(core.debug).toHaveBeenNthCalledWith(
-      1,
-      'URL: https://jfrog.example.com, Provider: github, Audience: jfrog'
-    )
-    expect(core.setOutput).toHaveBeenNthCalledWith(
-      1,
-      'token',
-      expect.stringMatching('exampleAccessToken')
-    )
+    expect(core.debug).toHaveBeenNthCalledWith(1, 'URL: https://jfrog.example.com, Provider: github, Audience: jfrog')
+    expect(core.setOutput).toHaveBeenNthCalledWith(1, 'token', expect.stringMatching('exampleAccessToken'))
   })
 
   it('results in an error', async () => {
@@ -102,10 +95,7 @@ describe('main.ts', () => {
     expect(scopeJfrog.isDone()).toBe(true)
 
     // Verify that all of the core library functions were called correctly
-    expect(core.debug).toHaveBeenNthCalledWith(
-      1,
-      'URL: https://jfrog.example.com, Provider: github, Audience: jfrog'
-    )
+    expect(core.debug).toHaveBeenNthCalledWith(1, 'URL: https://jfrog.example.com, Provider: github, Audience: jfrog')
     expect(core.setFailed).toHaveBeenCalledWith('Failed request: (401)')
     expect(core.error).not.toHaveBeenCalled()
   })

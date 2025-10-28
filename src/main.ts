@@ -18,21 +18,14 @@ export async function run(): Promise<void> {
     core.debug(`URL: ${url}, Provider: ${provider}, Audience: ${audience}`)
     // Get the access token from JFrog
     const _http: httpm.HttpClient = new httpm.HttpClient('jfrog-oidc-action')
-    const [statusCode, token] = await jfrogTokenExchange(
-      _http,
-      url,
-      provider,
-      id_token
-    )
+    const [statusCode, token] = await jfrogTokenExchange(_http, url, provider, id_token)
     if (statusCode == (httpm.HttpCodes.OK as number)) {
       if (token) {
         core.setSecret(token)
         // Set outputs for other workflow steps to use
         core.setOutput('token', token)
       } else {
-        core.setFailed(
-          `JFrog OIDC token did not return a token, status: ${statusCode}`
-        )
+        core.setFailed(`JFrog OIDC token did not return a token, status: ${statusCode}`)
       }
     } else {
       core.setFailed(`JFrog OIDC token exchange failed, status: ${statusCode}`)

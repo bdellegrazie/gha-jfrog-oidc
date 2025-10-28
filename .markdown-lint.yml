@@ -6,6 +6,8 @@ MD004:
 
 # Disable line length for tables
 MD013:
+  code_block_line_length: 120
+  line_length: 120
   tables: false
 
 # Ordered list item prefix
