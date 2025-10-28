@@ -1,7 +1,7 @@
 {
   "name": "gha-jfrog-oidc",
   "description": "JFrog Artifactory OIDC Github Action",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Brett Delle Grazie",
   "type": "module",
   "private": true,
