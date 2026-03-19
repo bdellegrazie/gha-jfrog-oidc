@@ -54,10 +54,12 @@ jobs:
   #  permissions:
   #    id-token: write
   #    contents: read
+  #
   #  steps:
   #    - name: Checkout
   #      id: checkout
   #      uses: actions/checkout@v6
+  #
   #    - name: Test Local Action
   #      id: gha-jfrog-oidc
   #      uses: ./
@@ -65,6 +67,7 @@ jobs:
   #        audience: ''  # "audience" of the OIDC Integration
   #        provider: ''  # "provider name" of the OIDC Integration
   #        url: ''  # Base URL of Jfrog instance
+  #
   #    - name: Print Output
   #      id: output
   #      run: echo "{{ steps.gha-jfrog-oidc.outputs.token }}"
